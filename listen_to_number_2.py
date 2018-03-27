@@ -14,6 +14,7 @@ __description__=""" Listen to number.
                 auditive memory by listening
                 of random integers series."""
 
+"""TODO: solve problem matriz, make translations functions"""
 
 class Program:
     # Main class
@@ -33,6 +34,9 @@ class Program:
         self.lista_I = 0
         self.list_compare = 0
         self.button_clicks = 0
+        self.ico_spain = PhotoImage(file="spain.png")
+        self.ico_eo = PhotoImage(file="eo.gif")
+        self.ico_uk = PhotoImage(file="uk.png")
 
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
@@ -53,9 +57,9 @@ class Program:
             speed = -100
         else:
             speed = 200
-
+                                                    
         self.random_numbers_list()
-
+                                                    
         voice_list = self.lista_I
         engine = pyttsx3.init()
         engine.setProperty('rate', speed)
@@ -110,6 +114,16 @@ class Program:
             pass
         self.e2.delete(0,'end')
         
+    # translation functions
+    def es_translation(self):
+        pass
+        
+    def eo_translation(self):
+        pass
+        
+    def en_translation(self):
+        pass
+        
     def run(self):
         # Labels
         Label(self.master, text="Enter number of numbers:").grid(row=0) # label one
@@ -128,6 +142,9 @@ class Program:
         r1.grid(row=1, column=1)
         r2.grid(row=2, column=1)
         # grid section of buttons
+        Button(self.master, image = self.ico_spain,width="16",height="16", command="").grid(row=5, column=0)
+        Button(self.master, image = self.ico_eo,width="16",height="16", command="").grid(row=5, column=1)
+        Button(self.master, image = self.ico_uk,width="16",height="16", command="").grid(row=5, column=2)
         Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4)
         Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4)
         Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4)

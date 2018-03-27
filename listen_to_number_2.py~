@@ -41,15 +41,15 @@ class Program:
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
          self.how_many_numbers = int(self.e1.get())
-         if self.how_many_numbers == 0:
+         if self.how_many_numbers == 0: # control if the entry box is empty
             engine = pyttsx3.init()
             engine.say("The field is empty. Please, enter a digit.")
-            engine.runAndWait()
-         else:
+            engine.runAndWait() # speech advice of empty entry box
+         else: # generate list of numbers and store the info
              for i in range(self.how_many_numbers):
                  self.lista.append(random.randint(1, 99))
          self.lista_I = self.lista
-         self.how_many_numbers = 0
+         self.how_many_numbers = 0 # Reset the value for next cycle
 
     def voice(self):
         # generate digital voy from list of numbers =

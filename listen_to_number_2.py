@@ -21,7 +21,7 @@ class Program:
     def __init__(self):
         # Elements  of main window
         self.master = Tk()
-        self.master.title("Listen to number. 2.0") # Title main window.
+        self.master.title("Listen to number. 2.1") # Title main window.
         # variables of all program
         self.how_many_numbers = 0
         self.entry_number_to_compare = []

@@ -32,6 +32,7 @@ class Program:
         self.e2 = 0
         self.lista_I = 0
         self.list_compare = 0
+        self.button_clicks = 0
 
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
@@ -44,6 +45,7 @@ class Program:
              for i in range(self.how_many_numbers):
                  self.lista.append(random.randint(1, 99))
          self.lista_I = self.lista
+         self.how_many_numbers = 0
 
     def voice(self):
         # generate digital voy from list of numbers =
@@ -77,6 +79,7 @@ class Program:
             
         Label(self.window, text="List from entry: ").grid(row=1, column=0)
         for ii in list_compare:
+            # list comprehension for compare
             comparation = [item for item in list_voice if item in list_compare]
             if len(comparation) > 0:
                 for item in comparation: color ="white"
@@ -99,6 +102,12 @@ class Program:
         # and delete de entry, wait for the next input
         for value in self.e2.get().split():
             self.entry_number_to_compare.append(int(value))
+        length_lista=len(self.lista)
+        length_entry=len(self.entry_number_to_compare)
+        if length_lista == length_entry:
+            self.compare_voice_list_write_list()
+        else:
+            pass
         self.e2.delete(0,'end')
         
     def run(self):

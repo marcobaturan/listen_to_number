@@ -7,7 +7,7 @@ import random
 __dedicated_to__="Elenuchy"
 __author__ ="Marco Baturan Garcia"
 __date__ ="2018/03/23"
-__license__="GNU, Open Source"
+__license__="GNU & SLUC, Open Source"
 __collaborator__="Reset Reboot"
 __description__=""" Listen to number.
                 It's an Open SOurce software for training
@@ -32,6 +32,7 @@ class Program:
         self.e2 = 0
         self.lista_I = 0
         self.list_compare = 0
+        self.button_clicks = 0
 
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
@@ -44,6 +45,7 @@ class Program:
              for i in range(self.how_many_numbers):
                  self.lista.append(random.randint(1, 99))
          self.lista_I = self.lista
+         self.how_many_numbers = 0
 
     def voice(self):
         # generate digital voy from list of numbers =
@@ -100,6 +102,12 @@ class Program:
         # and delete de entry, wait for the next input
         for value in self.e2.get().split():
             self.entry_number_to_compare.append(int(value))
+        length_lista=len(self.lista)
+        length_entry=len(self.entry_number_to_compare)
+        if length_lista == length_entry:
+            self.compare_voice_list_write_list()
+        else:
+            pass
         self.e2.delete(0,'end')
         
     def run(self):

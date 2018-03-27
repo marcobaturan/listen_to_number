@@ -8,7 +8,7 @@ __dedicated_to__="Elenuchy"
 __author__ ="Marco Baturan Garcia"
 __date__ ="2018/03/23"
 __license__="GNU & SLUC, Open Source"
-__collaborator__="Reset Reboot"
+__collaborators__="Elenuchy, Reset Reboot"
 __description__=""" Listen to number.
                 It's an Open SOurce software for training
                 auditive memory by listening

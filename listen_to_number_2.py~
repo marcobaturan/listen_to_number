@@ -124,7 +124,7 @@ class Program:
     def en_translation(self):
         pass
         
-    def click(self, event):
+    def click(self, event): # self for calll inn everey part, event for call from keyboard
         self.introduce()
         
     def run(self):

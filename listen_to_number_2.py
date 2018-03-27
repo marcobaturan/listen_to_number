@@ -41,30 +41,30 @@ class Program:
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
          self.how_many_numbers = int(self.e1.get())
-         if self.how_many_numbers == 0:
+         if self.how_many_numbers == 0: # control if the entry box is empty
             engine = pyttsx3.init()
             engine.say("The field is empty. Please, enter a digit.")
-            engine.runAndWait()
-         else:
+            engine.runAndWait() # speech advice of empty entry box
+         else: # generate list of numbers and store the info
              for i in range(self.how_many_numbers):
                  self.lista.append(random.randint(1, 99))
          self.lista_I = self.lista
-         self.how_many_numbers = 0
+         self.how_many_numbers = 0 # Reset the value for next cycle
 
     def voice(self):
         # generate digital voy from list of numbers =
-        if self.v.get() == 1:
-            speed = -100
+        if self.v.get() == 1: # manage the speed of voyce
+            speed = -100 # slow
         else:
-            speed = 200
+            speed = 200 # fast
                                                     
-        self.random_numbers_list()
+        self.random_numbers_list() # import function
                                                     
-        voice_list = self.lista_I
+        voice_list = self.lista_I # call variable
         engine = pyttsx3.init()
         engine.setProperty('rate', speed)
         engine.say(voice_list)
-        engine.runAndWait()
+        engine.runAndWait()  # speak the numbers
 
     def compare_voice_list_write_list(self):
         # Compare voice list vs a write list by user
@@ -96,9 +96,9 @@ class Program:
         
     def close(self):
         # It's close and destroy the window: COmpare the list
-        self.window.destroy()
-        self.lista.clear()
-        self.entry_number_to_compare.clear()
+        self.window.destroy() # destroy window
+        self.lista.clear() # clear the list
+        self.entry_number_to_compare.clear() # clear variable
         
     def introduce(self):
         # read de entry of number of numbers
@@ -116,15 +116,16 @@ class Program:
         
     # translation functions
     def es_translation(self):
-        pass
+        pass # pendant
         
     def eo_translation(self):
-        pass
+        pass # pendant
         
     def en_translation(self):
-        pass
+        pass # pendant
         
-    def click(self, event): # self for calll inn everey part, event for call from keyboard
+    def click(self, event): 
+        # self for calll inn everey part, event for call from keyboard
         self.introduce()
         
     def run(self):
@@ -136,8 +137,8 @@ class Program:
         self.e1 = Entry(self.master) # entry number of integers
         self.e1.insert(0,self.basic) # Insert value in entry
         self.e2 = Entry(self.master) # Insert values for comparation
-        self.e2.insert(0, self.basic)
-        self.e2.bind("<Return>", self.click)
+        self.e2.insert(0, self.basic) # insert basic value for reset
+        self.e2.bind("<Return>", self.click) # bind button return
         r1 = Radiobutton(self.master, text="Slow", variable=self.v, value=1) # option of 1,2,3 seconds
         r2 = Radiobutton(self.master, text="Fast", variable=self.v, value=2)
         # grid section for input
@@ -146,15 +147,15 @@ class Program:
         r1.grid(row=1, column=1)
         r2.grid(row=2, column=1)
         # grid section of buttons
-        Button(self.master, image = self.ico_spain,width="16",height="16", command="").grid(row=5, column=0)
-        Button(self.master, image = self.ico_eo,width="16",height="16", command="").grid(row=5, column=1)
-        Button(self.master, image = self.ico_uk,width="16",height="16", command="").grid(row=5, column=2)
-        Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4)
-        Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4)
-        Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4)
+        Button(self.master, image = self.ico_spain,width="16",height="16", command="").grid(row=5, column=0) # spanish
+        Button(self.master, image = self.ico_eo,width="16",height="16", command="").grid(row=5, column=1) # esperanto
+        Button(self.master, image = self.ico_uk,width="16",height="16", command="").grid(row=5, column=2) # english
+        Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4) # introduce
+        Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4) # close program
+        Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4) #speak
         Button(self.master, text='Compare lists', command=self.compare_voice_list_write_list).grid(row=4, column=2, sticky=W, pady=4)
-        self.master.mainloop()
+        self.master.mainloop() # create main window
 
 if __name__=='__main__': # call the main program
-    program = Program()
+    program = Program() # instance class
     program.run() # remember, any terminal function has () for run

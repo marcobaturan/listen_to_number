@@ -124,6 +124,9 @@ class Program:
     def en_translation(self):
         pass
         
+    def click(self, event): # self for calll inn everey part, event for call from keyboard
+        self.introduce()
+        
     def run(self):
         # Labels
         Label(self.master, text="Enter number of numbers:").grid(row=0) # label one
@@ -134,6 +137,7 @@ class Program:
         self.e1.insert(0,self.basic) # Insert value in entry
         self.e2 = Entry(self.master) # Insert values for comparation
         self.e2.insert(0, self.basic)
+        self.e2.bind("<Return>", self.click)
         r1 = Radiobutton(self.master, text="Slow", variable=self.v, value=1) # option of 1,2,3 seconds
         r2 = Radiobutton(self.master, text="Fast", variable=self.v, value=2)
         # grid section for input

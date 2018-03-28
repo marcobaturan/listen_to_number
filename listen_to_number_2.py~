@@ -49,7 +49,7 @@ class Program:
              for i in range(self.how_many_numbers):
                  self.lista.append(random.randint(1, 99))
          self.lista_I = self.lista
-         self.how_many_numbers = 0 # Reset the value for next cycle
+         self.how_many_numbers == 0
 
     def voice(self):
         # generate digital voy from list of numbers =
@@ -65,6 +65,8 @@ class Program:
         engine.setProperty('rate', speed)
         engine.say(voice_list)
         engine.runAndWait()  # speak the numbers
+        voice_list.clear()
+        self.e1.delete(0,'end')
 
     def compare_voice_list_write_list(self):
         # Compare voice list vs a write list by user
@@ -72,9 +74,9 @@ class Program:
         # And put in red the diference.
         self.window = Toplevel(self.master) # Title second window
         self.window.title('Compare the list:')
-        self.lista.reverse()
-        list_voice = self.lista
-        self.entry_number_to_compare.reverse()
+        #self.lista.reverse()
+        list_voice = self.lista_I
+        #self.entry_number_to_compare.reverse()
         list_compare = self.entry_number_to_compare
         Label(self.window, text="List from voice: ").grid(row=0, column=0)
         for i in list_voice:
@@ -83,11 +85,10 @@ class Program:
         Label(self.window, text="List from entry: ").grid(row=1, column=0)
         for ii in list_compare:
             # list for compare
-            if len(list_voice) > 0 and (list_voice == list_compare):
-                color=""
+            if ii not in list_voice:
+                color ='red'
             else:
-                color='red'
-                # to resolve, fuck
+                color='grey'
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)
         Button(self.window, text='Close', command=self.close).grid(row=2, column=0)

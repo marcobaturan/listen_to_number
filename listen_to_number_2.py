@@ -80,15 +80,13 @@ class Program:
         for i in list_voice:
             label_voice = Label(self.window, text=i)
             label_voice.grid(row=0, column= i + 1)
-            
         Label(self.window, text="List from entry: ").grid(row=1, column=0)
         for ii in list_compare:
-            # list comprehension for compare
-            comparation = [item for item in list_voice if item in list_compare]
-            if len(comparation) > 0:
-                for item in comparation: color ="white"
+            # list for compare
+            if len(list_voice) > 0 and (list_voice == list_compare):
+                color='grey'
             else:
-                color="red"
+                color='red'
                 # to resolve, fuck
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)

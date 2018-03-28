@@ -1,23 +1,25 @@
-# test_explanation.py
-import tkinter
-window =tkinter.Tk()
+
+# !/usr/bin/python3
+from tkinter import *
+
+def sel():
+   selection = "You selected the option " + str(var.get())
+   label.config(text = selection)
+
+root = Tk()
+var = IntVar()
+R1 = Radiobutton(root, text = "Option 1", variable = var, value = 1,
+                  command = sel).grid(row=0, column=0)
 
 
-list_voice = [1,2,3] # correct
-list_compare=[1,4,3] # incorrect
+R2 = Radiobutton(root, text = "Option 2", variable = var, value = 2,
+                  command = sel).grid(row=1, column=0)
 
-for i in list_voice:
-    label_voice = tkinter.Label(window, text=i)
-    label_voice.grid(row=0, column= i )
 
-for ii in list_compare:
-    # list for compare
-    if ii not in list_voice:
-        color ='red'
-    else:
-        color='grey'
-    
-    label_entry = tkinter.Label(window, text=ii ,background=color)
-    label_entry.grid(row=1, column= ii )
+R3 = Radiobutton(root, text = "Option 3", variable = var, value = 3,
+                  command = sel).grid(row=3, column=0)
 
-window.mainloop()
+
+label = Label(root, text='espero')
+label.grid(row=4, column=0)
+root.mainloop()

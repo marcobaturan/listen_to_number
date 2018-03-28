@@ -27,9 +27,9 @@ class Program:
         self.entry_number_to_compare = []
         self.lista = []
         self.v = IntVar()
-        self.v_language = IntVar()
         self.v.set(1)
-        self.v_language.set(1)
+        self.vlanguage = IntVar()
+        self.vlanguage.set(1)
         self.basic = 0
         self.e1 = 0
         self.e2 = 0
@@ -39,18 +39,6 @@ class Program:
         self.ico_spain = PhotoImage(file="spain.png")
         self.ico_eo = PhotoImage(file="eo.gif")
         self.ico_uk = PhotoImage(file="uk.png")
-        # text variables for trasnlation
-        self.enter_number_of_numbers =''
-        self.speed_of_voice=''
-        self.slow=''
-        self.fast=''
-        self.introduce=''
-        self.quit_text=''
-        self.compare_lists=''
-        self.say_numbers=''
-        self.list_from_voice=''
-        self.list_from_entry=''
-        self.close_text=''
         
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
@@ -82,24 +70,24 @@ class Program:
         self.e1.delete(0,'end')
         
     def trasnlations(self):
-        if self.v_language.get() == 1:
+        if self.vlanguage.get() == 1:
             # english
-            self.enter_number_of_numbers ='Enter number of numbers'
-            self.speed_of_voice='Speed of voice'
+            self.lbl_enter.configure(text ='Enter number of numbers')
+            self.lbl_speed.configure(text='Speed of voice')
             self.slow='slow'
             self.fast='fast'
-            self.introduce='introduce'
+            self.lbl_intro.configure(text='introduce')
             self.quit_text='quit'
             self.compare_lists='compare lists'
             self.say_numbers='say numbers'
             self.list_from_voice='list from voice'
             self.list_from_entry='list from entry'
             self.close_text='Close'
-            pass
-        elif self.v_language() == 2:
+            
+        if self.vlanguage.get() == 3:
             # Esperanto
-            self.enter_number_of_numbers ='cuantos numeros'
-            self.speed_of_voice='velocidad de la voz '
+            self.lbl_enter.configure(text ='cuantos numeros')
+            self.lbl_speed.configure(text='velocidad de la voz ')
             self.slow='lento'
             self.fast='rapido'
             self.introduce='Introduzca'
@@ -109,11 +97,11 @@ class Program:
             self.list_from_voice='lista recitada'
             self.list_from_entry='lista introducida'
             self.close_text='cerrar'
-            pass
-        elif self.v_language() == 3:
+            
+        if self.vlanguage.get() == 2:
             # Spanish
-            self.enter_number_of_numbers ='kiom da nombroj'
-            self.speed_of_voice='rapido de vocxo'
+            self.lbl_enter.configure(text ='kiom da nombroj')
+            self.lbl_speed.configure(text='rapido de vocxo')
             self.slow='malrapida'
             self.fast='rapida'
             self.introduce='eniri'
@@ -123,9 +111,7 @@ class Program:
             self.list_from_voice='reklamita listo'
             self.list_from_entry='listo enkondukita'
             self.close_text='fermu'
-            pass
-        else:
-            pass
+
         
     def compare_voice_list_write_list(self):
         # Compare voice list vs a write list by user
@@ -137,11 +123,12 @@ class Program:
         list_voice = self.lista_I
         #self.entry_number_to_compare.reverse()
         list_compare = self.entry_number_to_compare
-        Label(self.window, text="List from voice: ").grid(row=0, column=0)
+        self.lbl_voice=Label(self.window, text="List from voice: ")
+        self.lbl_voice.grid(row=0, column=0)
         for i in list_voice:
-            label_voice = Label(self.window, text=i)
-            label_voice.grid(row=0, column= i + 1)
-        Label(self.window, text="List from entry: ").grid(row=1, column=0)
+            label_voice = Label(self.window, text=i).grid(row=0, column= i + 1)
+        self.lbl_entry=Label(self.window, text="List from entry: ")
+        self.lbl_entry.grid(row=1, column=0)
         for ii in list_compare:
             # list for compare
             if ii not in list_voice:
@@ -179,32 +166,35 @@ class Program:
         
     def run(self):
         # Labels
-        Label(self.master, text="Enter number of numbers:").grid(row=0) # label one
-        Label(self.master, text="Speed of voice: ").grid(row=1) #label speed
-        Label(self.master, text="Introduce the result: ").grid(row=3) #label speed
+        self.lbl_enter = Label(self.master, text="enter number of numbers")
+        self.lbl_enter.grid(row=0, column=0) # label one
+        self.lbl_speed =Label(self.master, text="Speed of voice: ") #label speed
+        self.lbl_speed.grid(row=1, column=0)
+        self.lbl_intro =Label(self.master, text="Introduce the result: ") #label speed
+        self.lbl_intro.grid(row=3,column=0)
         # input elements
         self.e1 = Entry(self.master) # entry number of integers
         self.e1.insert(0,self.basic) # Insert value in entry
         self.e2 = Entry(self.master) # Insert values for comparation
         self.e2.insert(0, self.basic) # insert basic value for reset
         self.e2.bind("<Return>", self.click) # bind button return
-        r1 = Radiobutton(self.master, text="Slow", variable=self.v, value=1) # option of 1,2,3 seconds
-        r2 = Radiobutton(self.master, text="Fast", variable=self.v, value=2)
+        self.r1 = Radiobutton(self.master, text="Slow", variable=self.v, value=1) # option of 1,2,3 seconds
+        self.r2 = Radiobutton(self.master, text="Fast", variable=self.v, value=2)
         # grid section for input
         self.e1.grid(row=0, column=1)
         self.e2.grid(row=3, column=1)
-        r1.grid(row=1, column=1)
-        r2.grid(row=2, column=1)
+        self.r1.grid(row=1, column=1)
+        self.r2.grid(row=2, column=1)
         # grid section of buttons
         # language
-        es=Radiobutton(self.master, image = self.ico_spain,width="16",height="16",variable=self.v_language, value=3).grid(row=5, column=0) # spanish
-        eo=Radiobutton(self.master, image = self.ico_eo,width="16",height="16",variable=self.v_language, value=2).grid(row=5, column=1) # esperanto
-        en=Radiobutton(self.master, image = self.ico_uk,width="16",height="16",variable=self.v_language, value=1).grid(row=5, column=2) # english
+        es=Radiobutton(self.master, image = self.ico_spain,width="16",height="16",variable=self.vlanguage, value=3,command=self.trasnlations).grid(row=5, column=0) # spanish
+        eo=Radiobutton(self.master, image = self.ico_eo,width="16",height="16",variable=self.vlanguage, value=2,command=self.trasnlations).grid(row=5, column=1) # esperanto
+        en=Radiobutton(self.master, image = self.ico_uk,width="16",height="16",variable=self.vlanguage, value=1,command=self.trasnlations).grid(row=5, column=2) # english
         # controls
-        Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4) # introduce
-        Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4) # close program
-        Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4) #speak
-        Button(self.master, text='Compare lists', command=self.compare_voice_list_write_list).grid(row=4, column=2, sticky=W, pady=4)
+        btn_intro=Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4) # introduce
+        btn_quit=Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4) # close program
+        btn_say=Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4) #speak
+        btn_compare=Button(self.master, text='Compare lists', command=self.compare_voice_list_write_list).grid(row=4, column=2, sticky=W, pady=4)
         self.master.mainloop() # create main window
 
 if __name__=='__main__': # call the main program

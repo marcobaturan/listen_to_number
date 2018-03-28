@@ -14,7 +14,7 @@ __description__=""" Listen to number.
                 auditive memory by listening
                 of random integers series."""
 
-"""TODO: solve problem matriz, make translations functions"""
+"""TODO: resolve order matrix"""
 
 class Program:
     # Main class
@@ -27,7 +27,9 @@ class Program:
         self.entry_number_to_compare = []
         self.lista = []
         self.v = IntVar()
+        self.v_language = IntVar()
         self.v.set(1)
+        self.v_language.set(1)
         self.basic = 0
         self.e1 = 0
         self.e2 = 0
@@ -37,7 +39,19 @@ class Program:
         self.ico_spain = PhotoImage(file="spain.png")
         self.ico_eo = PhotoImage(file="eo.gif")
         self.ico_uk = PhotoImage(file="uk.png")
-
+        # text variables for trasnlation
+        self.enter_number_of_numbers =''
+        self.speed_of_voice=''
+        self.slow=''
+        self.fast=''
+        self.introduce=''
+        self.quit_text=''
+        self.compare_lists=''
+        self.say_numbers=''
+        self.list_from_voice=''
+        self.list_from_entry=''
+        self.close_text=''
+        
     def random_numbers_list(self):
          """ Generate a list of random integer numbers."""
          self.how_many_numbers = int(self.e1.get())
@@ -65,9 +79,54 @@ class Program:
         engine.setProperty('rate', speed)
         engine.say(voice_list)
         engine.runAndWait()  # speak the numbers
-        voice_list.clear()
         self.e1.delete(0,'end')
-
+        
+    def trasnlations(self):
+        if self.v_language.get() == 1:
+            # english
+            self.enter_number_of_numbers ='Enter number of numbers'
+            self.speed_of_voice='Speed of voice'
+            self.slow='slow'
+            self.fast='fast'
+            self.introduce='introduce'
+            self.quit_text='quit'
+            self.compare_lists='compare lists'
+            self.say_numbers='say numbers'
+            self.list_from_voice='list from voice'
+            self.list_from_entry='list from entry'
+            self.close_text='Close'
+            pass
+        elif self.v_language() == 2:
+            # Esperanto
+            self.enter_number_of_numbers ='Cuantos numeros'
+            self.speed_of_voice='Velocidad de la voz '
+            self.slow='lento'
+            self.fast='rapido'
+            self.introduce='Introduzca'
+            self.quit_text='Salir'
+            self.compare_lists='Comparar listas'
+            self.say_numbers='recitar numeros'
+            self.list_from_voice='Lista recitada'
+            self.list_from_entry='Lista introducida'
+            self.close_text='Cerrar'
+            pass
+        elif self.v_language() == 3:
+            # Spanish
+            self.enter_number_of_numbers ='Kiom da nombroj'
+            self.speed_of_voice='Rapido de vocxo'
+            self.slow='malrapida'
+            self.fast='rapida'
+            self.introduce='eniri'
+            self.quit_text='forigi'
+            self.compare_lists='Kompari listojn'
+            self.say_numbers='diru nombroj'
+            self.list_from_voice='Reklamita listo'
+            self.list_from_entry='Listo enkondukita'
+            self.close_text='Fermu'
+            pass
+        else:
+            pass
+        
     def compare_voice_list_write_list(self):
         # Compare voice list vs a write list by user
         # And raise a matrix composed by two list
@@ -88,7 +147,7 @@ class Program:
             if ii not in list_voice:
                 color ='red'
             else:
-                color='grey'
+                color='light grey'
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)
         Button(self.window, text='Close', command=self.close).grid(row=2, column=0)
@@ -113,15 +172,6 @@ class Program:
             pass
         self.e2.delete(0,'end')
         
-    # translation functions
-    def es_translation(self):
-        pass # pendant
-        
-    def eo_translation(self):
-        pass # pendant
-        
-    def en_translation(self):
-        pass # pendant
         
     def click(self, event): 
         # self for calll inn everey part, event for call from keyboard
@@ -146,9 +196,11 @@ class Program:
         r1.grid(row=1, column=1)
         r2.grid(row=2, column=1)
         # grid section of buttons
-        Button(self.master, image = self.ico_spain,width="16",height="16", command="").grid(row=5, column=0) # spanish
-        Button(self.master, image = self.ico_eo,width="16",height="16", command="").grid(row=5, column=1) # esperanto
-        Button(self.master, image = self.ico_uk,width="16",height="16", command="").grid(row=5, column=2) # english
+        # language
+        es=Radiobutton(self.master, image = self.ico_spain,width="16",height="16",variable=self.v_language, value=3).grid(row=5, column=0) # spanish
+        eo=Radiobutton(self.master, image = self.ico_eo,width="16",height="16",variable=self.v_language, value=2).grid(row=5, column=1) # esperanto
+        en=Radiobutton(self.master, image = self.ico_uk,width="16",height="16",variable=self.v_language, value=1).grid(row=5, column=2) # english
+        # controls
         Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4) # introduce
         Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4) # close program
         Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4) #speak

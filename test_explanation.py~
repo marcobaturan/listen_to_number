@@ -1,25 +1,14 @@
-
-# !/usr/bin/python3
-from tkinter import *
-
-def sel():
-   selection = "You selected the option " + str(var.get())
-   label.config(text = selection)
-
-root = Tk()
-var = IntVar()
-R1 = Radiobutton(root, text = "Option 1", variable = var, value = 1,
-                  command = sel).grid(row=0, column=0)
-
-
-R2 = Radiobutton(root, text = "Option 2", variable = var, value = 2,
-                  command = sel).grid(row=1, column=0)
-
-
-R3 = Radiobutton(root, text = "Option 3", variable = var, value = 3,
-                  command = sel).grid(row=3, column=0)
-
-
-label = Label(root, text='espero')
-label.grid(row=4, column=0)
+import Tkinter as tk  # for Python3 use import tkinter as tk
+def toggle_text():
+    """toggle button text between Hi and Goodbye"""
+    if button["text"] == "Hi":
+        # switch to Goodbye
+        button["text"] = "Goodbye"
+    else:
+        # reset to Hi
+        button["text"] = "Hi"
+root = tk.Tk()
+root.title("Click the Button")
+button = tk.Button( text="Hi", width=12, command=toggle_text)
+button.pack(padx=100, pady=10)
 root.mainloop()

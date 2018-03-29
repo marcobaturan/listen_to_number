@@ -74,40 +74,40 @@ class Program:
             # english
             self.lbl_enter.configure(text ='Enter number of numbers')
             self.lbl_speed.configure(text='Speed of voice')
-            self.slow='slow'
-            self.fast='fast'
-            self.lbl_intro.configure(text='introduce')
-            self.quit_text='quit'
-            self.compare_lists='compare lists'
-            self.say_numbers='say numbers'
-            self.list_from_voice='list from voice'
+            self.r1.configure(text='slow')
+            self.r2.configure(text='fast')
+            self.btn_intro.configure(text='introduce')
+            self.btn_quit.configure(text='quit')
+            self.btn_compare.configure(text='compare lists')
+            self.btn_say.configure(text='say numbers')
+            self.lbl_voice.configure(text='List from voice:')
             self.list_from_entry='list from entry'
             self.close_text='Close'
             
         if self.vlanguage.get() == 3:
-            # Esperanto
+            # Español
             self.lbl_enter.configure(text ='cuantos numeros')
             self.lbl_speed.configure(text='velocidad de la voz ')
-            self.slow='lento'
-            self.fast='rapido'
-            self.introduce='Introduzca'
-            self.quit_text='salir'
-            self.compare_lists='comparar listas'
-            self.say_numbers='recitar numeros'
+            self.r1.configure(text='lento')
+            self.r2.configure(text='rapido')
+            self.btn_intro.config(text='Introduzca')
+            self.btn_quit.configure(text='salir')
+            self.btn_compare.configure(text='comparar listas')
+            self.btn_say.configure(text='recitar numeros')
             self.list_from_voice='lista recitada'
             self.list_from_entry='lista introducida'
             self.close_text='cerrar'
             
         if self.vlanguage.get() == 2:
-            # Spanish
+            # Esperanto
             self.lbl_enter.configure(text ='kiom da nombroj')
             self.lbl_speed.configure(text='rapido de vocxo')
-            self.slow='malrapida'
-            self.fast='rapida'
-            self.introduce='eniri'
-            self.quit_text='forigi'
-            self.compare_lists='kompari listojn'
-            self.say_numbers='diru nombroj'
+            self.r2.configure(text='malrapida')
+            self.r2.configure(text='rapida')
+            self.btn_intro.config(text='eniri')
+            self.btn_quit.configure(text='forigi')
+            self.btn_compare.configure(text='kompari listojn')
+            self.btn_say.configure(text='diru nombroj')
             self.list_from_voice='reklamita listo'
             self.list_from_entry='listo enkondukita'
             self.close_text='fermu'
@@ -191,10 +191,14 @@ class Program:
         eo=Radiobutton(self.master, image = self.ico_eo,width="16",height="16",variable=self.vlanguage, value=2,command=self.trasnlations).grid(row=5, column=1) # esperanto
         en=Radiobutton(self.master, image = self.ico_uk,width="16",height="16",variable=self.vlanguage, value=1,command=self.trasnlations).grid(row=5, column=2) # english
         # controls
-        btn_intro=Button(self.master, text='Introduce', command=self.introduce).grid(row=3, column=2, sticky=E, pady=4) # introduce
-        btn_quit=Button(self.master, text='Quit', command=self.master.quit).grid(row=4, column=0, sticky=W, pady=4) # close program
-        btn_say=Button(self.master, text='Say numbers', command=self.voice).grid(row=4, column=1, sticky=W, pady=4) #speak
-        btn_compare=Button(self.master, text='Compare lists', command=self.compare_voice_list_write_list).grid(row=4, column=2, sticky=W, pady=4)
+        self.btn_intro=Button(self.master, text='Introduce', command=self.introduce) # introduce
+        self.btn_intro.grid(row=3, column=2, sticky=E, pady=4)
+        self.btn_quit=Button(self.master, text='Quit', command=self.master.quit)# close program
+        self.btn_quit.grid(row=4, column=0, sticky=W, pady=4) 
+        self.btn_say=Button(self.master, text='Say numbers', command=self.voice)#speak
+        self.btn_say.grid(row=4, column=1, sticky=W, pady=4) 
+        self.btn_compare=Button(self.master, text='Compare lists', command=self.compare_voice_list_write_list)
+        self.btn_compare.grid(row=4, column=2, sticky=W, pady=4)
         self.master.mainloop() # create main window
 
 if __name__=='__main__': # call the main program

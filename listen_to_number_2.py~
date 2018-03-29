@@ -81,8 +81,8 @@ class Program:
             self.btn_compare.configure(text='compare lists')
             self.btn_say.configure(text='say numbers')
             self.lbl_voice.configure(text='List from voice:')
-            self.list_from_entry='list from entry'
-            self.close_text='Close'
+            self.lbl_entry.configure(text='list from entry')
+            self.btn_close.configure(text='Close')
             
         if self.vlanguage.get() == 3:
             # Español
@@ -94,9 +94,9 @@ class Program:
             self.btn_quit.configure(text='salir')
             self.btn_compare.configure(text='comparar listas')
             self.btn_say.configure(text='recitar numeros')
-            self.list_from_voice='lista recitada'
-            self.list_from_entry='lista introducida'
-            self.close_text='cerrar'
+            self.lbl_voice.configure(text='lista recitada')
+            self.lbl_entry.configure(text='lista introducida')
+            self.btn_close.configure(text='cerrar')
             
         if self.vlanguage.get() == 2:
             # Esperanto
@@ -108,9 +108,9 @@ class Program:
             self.btn_quit.configure(text='forigi')
             self.btn_compare.configure(text='kompari listojn')
             self.btn_say.configure(text='diru nombroj')
-            self.list_from_voice='reklamita listo'
-            self.list_from_entry='listo enkondukita'
-            self.close_text='fermu'
+            self.lbl_voice.configure(text='reklamita listo')
+            self.lbl_entry.configure(text='listo enkondukita')
+            self.btn_close.configure(text='fermu')
 
         
     def compare_voice_list_write_list(self):
@@ -137,7 +137,7 @@ class Program:
                 color='light grey'
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)
-        Button(self.window, text='Close', command=self.close).grid(row=2, column=0)
+        self.btn_close=Button(self.window, text='Close', command=self.close).grid(row=2, column=0)
         
     def close(self):
         # It's close and destroy the window: COmpare the list

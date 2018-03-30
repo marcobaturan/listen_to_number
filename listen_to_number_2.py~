@@ -80,9 +80,10 @@ class Program:
             self.btn_quit.configure(text='quit')
             self.btn_compare.configure(text='compare lists')
             self.btn_say.configure(text='say numbers')
-            self.lbl_voice.configure(text='List from voice:')
             self.lbl_entry.configure(text='list from entry')
+            self.lbl_voice.configure(text='List from voice:')
             self.btn_close.configure(text='Close')
+            self.lbl_result.configure(text='introduce the result')
             
         if self.vlanguage.get() == 3:
             # Español
@@ -94,9 +95,10 @@ class Program:
             self.btn_quit.configure(text='salir')
             self.btn_compare.configure(text='comparar listas')
             self.btn_say.configure(text='recitar numeros')
-            self.lbl_voice.configure(text='lista recitada')
             self.lbl_entry.configure(text='lista introducida')
+            self.lbl_voice.configure(text='lista recitada')
             self.btn_close.configure(text='cerrar')
+            self.lbl_result.configure(text='Introdizca el resultado')
             
         if self.vlanguage.get() == 2:
             # Esperanto
@@ -108,9 +110,10 @@ class Program:
             self.btn_quit.configure(text='forigi')
             self.btn_compare.configure(text='kompari listojn')
             self.btn_say.configure(text='diru nombroj')
-            self.lbl_voice.configure(text='reklamita listo')
             self.lbl_entry.configure(text='listo enkondukita')
+            self.lbl_voice.configure(text='reklamita listo')
             self.btn_close.configure(text='fermu')
+            self.lbl_result.configure(text='enui la rizulto')
 
         
     def compare_voice_list_write_list(self):
@@ -123,7 +126,7 @@ class Program:
         list_voice = self.lista_I
         #self.entry_number_to_compare.reverse()
         list_compare = self.entry_number_to_compare
-        self.lbl_voice=Label(self.window, text="List from voice: ")
+        self.lbl_voice = Label(self.window, text="List from voice: ")
         self.lbl_voice.grid(row=0, column=0)
         for i in list_voice:
             label_voice = Label(self.window, text=i).grid(row=0, column= i + 1)
@@ -137,7 +140,8 @@ class Program:
                 color='light grey'
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)
-        self.btn_close=Button(self.window, text='Close', command=self.close).grid(row=2, column=0)
+        self.btn_close=Button(self.window, text='Close', command=self.close)
+        self.btn_clos.grid(row=2, column=0)
         
     def close(self):
         # It's close and destroy the window: COmpare the list
@@ -170,8 +174,8 @@ class Program:
         self.lbl_enter.grid(row=0, column=0) # label one
         self.lbl_speed =Label(self.master, text="Speed of voice: ") #label speed
         self.lbl_speed.grid(row=1, column=0)
-        self.lbl_intro =Label(self.master, text="Introduce the result: ") #label speed
-        self.lbl_intro.grid(row=3,column=0)
+        self.lbl_result =Label(self.master, text="Introduce the result: ") #label speed
+        self.lbl_result.grid(row=3,column=0)
         # input elements
         self.e1 = Entry(self.master) # entry number of integers
         self.e1.insert(0,self.basic) # Insert value in entry

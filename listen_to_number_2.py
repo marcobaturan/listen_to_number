@@ -137,8 +137,8 @@ class Program:
                 color ='red'
             else:
                 color='light grey'
-            label_entry = Label(self.window, text=ii ,background=color)
-            label_entry.grid(row=1, column= ii + 1)
+            label_entry_I = Label(self.window, text=ii ,background=color)
+            label_entry_I.grid(row=1, column= ii + 1)
         self.btn_close=Button(self.window, text='Close', command=self.close)
         self.btn_close.grid(row=2, column=0)
         

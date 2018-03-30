@@ -141,7 +141,7 @@ class Program:
             label_entry = Label(self.window, text=ii ,background=color)
             label_entry.grid(row=1, column= ii + 1)
         self.btn_close=Button(self.window, text='Close', command=self.close)
-        self.btn_clos.grid(row=2, column=0)
+        self.btn_close.grid(row=2, column=0)
         
     def close(self):
         # It's close and destroy the window: COmpare the list

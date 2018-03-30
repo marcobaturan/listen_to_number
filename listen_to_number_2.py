@@ -21,7 +21,7 @@ class Program:
     def __init__(self):
         # Elements  of main window
         self.master = Tk()
-        self.master.title("Listen to number. 2.1") # Title main window.
+        self.master.title("Listen to number. 2.2") # Title main window.
         # variables of all program
         self.how_many_numbers = 0
         self.entry_number_to_compare = []
@@ -114,7 +114,6 @@ class Program:
             self.lbl_voice.configure(text='reklamita listo')
             self.btn_close.configure(text='fermu')
             self.lbl_result.configure(text='enui la rizulto')
-
         
     def compare_voice_list_write_list(self):
         # Compare voice list vs a write list by user
@@ -163,14 +162,13 @@ class Program:
             pass
         self.e2.delete(0,'end')
         
-        
     def click(self, event): 
         # self for calll inn everey part, event for call from keyboard
         self.introduce()
         
     def run(self):
         # Labels
-        self.lbl_enter = Label(self.master, text="enter number of numbers")
+        self.lbl_enter = Label(self.master, text="Enter number of numbers: ")
         self.lbl_enter.grid(row=0, column=0) # label one
         self.lbl_speed =Label(self.master, text="Speed of voice: ") #label speed
         self.lbl_speed.grid(row=1, column=0)

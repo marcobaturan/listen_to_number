@@ -128,7 +128,7 @@ class Program:
         self.lbl_voice = Label(self.window, text="List from voice: ")
         self.lbl_voice.grid(row=0, column=0)
         for i in list_voice:
-            label_voice = Label(self.window, text=i).grid(row=0, column= i + 1)
+            label_voice = Button(self.window, text=i).grid(row=0, column= i + 1)
         self.lbl_entry=Label(self.window, text="List from entry: ")
         self.lbl_entry.grid(row=1, column=0)
         for ii in list_compare:
@@ -137,7 +137,7 @@ class Program:
                 color ='red'
             else:
                 color='light grey'
-            label_entry_I = Label(self.window, text=ii ,background=color)
+            label_entry_I = Button(self.window, text=ii ,background=color)
             label_entry_I.grid(row=1, column= ii + 1)
         self.btn_close=Button(self.window, text='Close', command=self.close)
         self.btn_close.grid(row=2, column=0)

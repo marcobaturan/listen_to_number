@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Listen to Number
+Comment=A simple application to practice listening to numbers
+Exec=python3 /home/marco/PycharmProjects/listen_to_number/main.py
+Icon=/home/marco/PycharmProjects/listen_to_number/speaker_icon.png
+Terminal=false
+Categories=Education;Utility;

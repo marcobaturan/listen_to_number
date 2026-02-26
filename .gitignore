@@ -10,7 +10,11 @@
 [Ss]cripts
 pyvenv.cfg
 .venv
+.venv/
 pip-selfcheck.json
+```ignore
+.env/
+```
 
 ### VirtualEnv template
 # Virtualenv

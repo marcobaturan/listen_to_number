@@ -3,6 +3,7 @@ from tkinter import messagebox, ttk
 import pyttsx3
 import random
 import threading
+import time
 
 """
 Listen to Number Application
@@ -59,11 +60,10 @@ class ListenToNumberApp:
         self.length_dropdown.pack(pady=5)
 
         # Speech Rate Selection
-        # Note: 200 is standard. 100 is slow, 300 is fast.
-        ttk.Label(root, text="Select the speech rate (Words Per Minute)", font=("Arial", 10, "bold")).pack(pady=(10, 0))
-        ttk.Label(root, text="200 is Normal, Lower is Slower", font=("Arial", 8, "italic")).pack()
-        self.rate_var = tk.StringVar(value="200")
-        rate_options = ["300", "250", "200", "150", "100", "50", "25", "12", "5", "2", "1"]
+        ttk.Label(root, text="Recitation speed (Digits/min)", font=("Arial", 10, "bold")).pack(pady=(10, 0))
+        ttk.Label(root, text="1 (Slowest) to 60 (Fastest)", font=("Arial", 8, "italic")).pack()
+        self.rate_var = tk.StringVar(value="30")
+        rate_options = ["1", "5", "10", "20", "30", "40", "50", "60"]
         self.rate_dropdown = ttk.Combobox(root, textvariable=self.rate_var, values=rate_options, state="readonly")
         self.rate_dropdown.pack(pady=5)
 
@@ -99,31 +99,40 @@ class ListenToNumberApp:
         length = int(self.length_var.get())
         self.current_number = generate_random_number(length)
         
-        # Fetch target rate (direct WPM)
+        # Fetch target rate (1-300 scale, to be mapped internally)
         target_rate = int(self.rate_var.get())
         
         # Launch thread
         threading.Thread(target=self.read_number_task, args=(self.current_number, target_rate), daemon=True).start()
 
-    def read_number_task(self, number, rate):
+    def read_number_task(self, number, digits_per_minute):
         """
         Worker task for the speech thread. 
-        Initializes TTS engine, sets rate, and recites the number.
+        Initializes TTS engine and recites the number digit by digit with custom delay.
         
         Args:
             number (int): The number to recite.
-            rate (int): Words Per Minute (WPM) for the speech engine.
+            digits_per_minute (int): Speed in digits per minute.
         """
         try:
             # Initialize engine locally within the thread
             local_engine = pyttsx3.init()
-            local_engine.setProperty('rate', rate)
             
-            # Format digits with spaces to ensure clarity and individual pronunciation
-            sequence = " ".join(str(number))
+            # Set a standard comfortable rate for the voice itself
+            local_engine.setProperty('rate', 150)
             
-            local_engine.say(sequence)
-            local_engine.runAndWait()
+            # Calculate pause duration between digits
+            # pause_seconds = 60 / digits_per_minute
+            pause_seconds = 60.0 / digits_per_minute
+            
+            digits = str(number)
+            for i, digit in enumerate(digits):
+                local_engine.say(digit)
+                local_engine.runAndWait()
+                
+                # Add delay if not the last digit
+                if i < len(digits) - 1:
+                    time.sleep(pause_seconds)
             
             # Resource cleanup
             local_engine.stop()
@@ -151,7 +160,7 @@ class ListenToNumberApp:
         match = str(user_input) == str(self.current_number)
         
         # Prepare feedback message
-        status = "CORRECT! 🎉" if match else "INCORRECT! ❌"
+        status = "CORRECT!" if match else "INCORRECT!"
         result_msg = (
             f"Expected: {self.current_number}\n"
             f"You Typed: {user_input}\n\n"
